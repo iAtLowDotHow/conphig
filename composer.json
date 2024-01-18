@@ -1,0 +1,16 @@
+{
+	"name": "hows/conphig",
+	"autoload": {
+		"psr-4": {
+			"Addons\\": "Addons/",
+			"Core\\": "Core/"
+		}
+	},
+	"authors": [
+		{
+			"name": "iamhow",
+			"email": "i@low.how"
+		}
+	],
+	"require": {}
+}

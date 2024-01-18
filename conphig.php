@@ -24,7 +24,6 @@
  * Text Domain:       conphig
  * Domain Path:       /languages
  */
-
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
 	die;
@@ -74,6 +73,10 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-conphig.php';
  * @since    1.0.0
  */
 function run_conphig() {
+	/**
+	 * Bootstrapping Composer Autoloading for namespaces
+	 */
+	require plugin_dir_path( __FILE__ ) . 'vendor/autoload.php';
 
 	$plugin = new Conphig();
 	$plugin->run();

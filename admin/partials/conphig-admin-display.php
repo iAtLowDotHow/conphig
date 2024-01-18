@@ -12,5 +12,5 @@
  * @subpackage Conphig/admin/partials
  */
 ?>
-
+<div>Hello conphig admin display</div>
 <!-- This file should primarily consist of HTML with a little bit of PHP. -->
