@@ -85,6 +85,7 @@ class Conphig {
 		$this->set_locale();
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
+		$this->attach_core_loadables();
 		$this->attach_addons();
 
 	}
@@ -164,6 +165,7 @@ class Conphig {
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
+		$this->loader->add_action( 'admin_menu', $plugin_admin, 'add_plugin_admin_menu' );
 
 	}
 
@@ -183,24 +185,26 @@ class Conphig {
 
 	}
 
+	/**
+	 * Attach core loadables. These loadables belongs to the core of the plugin. They must be present and loaded before any addon.
+	 * Core loadables must not be edited.
+	 *
+	 * @return void
+	 */
+	private function attach_core_loadables() {
+		//$conphig_dashboard = new Core\ConphigDashboard($this->core_loader);
 
+	}
+
+	/**
+	 * Attach all Addons to the Loader.
+	 *
+	 * @return void
+	 */
 	private function attach_addons() {
-	//get all folder names in namespace Addons
-		// $parentFolder = FW_THEME_DIR.'page-templates';
-		// $filePattern = 'Module*.php';
-
-		// $this->requireFilesRecursively($parentFolder, $filePattern);
-
-		// foreach ($this->namespaces as $namespace) {
-		// 	$className = '\\'.$namespace . '\\ModuleAjax';
-		// 	$this->extensionLoader
-		// 	->attach( new $className( $this->loader ) )
-		// 	->load();
-		// }
 		$namespace = 'Addons';
 
 		$this->addon_loader = new Core\AddonLoader();
-		// $test = new Addons\Test();
 		$addonFolders = [];
 
 		// Get path to Addons namespace
@@ -235,16 +239,11 @@ class Conphig {
 
 			foreach ($moduleFiles as $file) {
 				$namespace = $this->extractNamespaces($file);
-				// var_dump($namespace);
-				// echo '<br>';
+
 				if (!empty($namespace)) {
 					$this->namespaces[] = $namespace;
 				}
 
-				// var_dump($file);
-				// echo '<br>';
-
-				// echo '<br>';
 				require_once $file;
 			}
 
