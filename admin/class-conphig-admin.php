@@ -112,6 +112,7 @@ class Conphig_Admin {
 	}
 
 	public function conphig_dashboard_page() {
+		// include ADDON_ReactTest_DIR . 'react_test/build/index.html';
     echo 'hello world';
   }
 

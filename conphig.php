@@ -64,6 +64,16 @@ register_deactivation_hook( __FILE__, 'deactivate_conphig' );
 require plugin_dir_path( __FILE__ ) . 'includes/class-conphig.php';
 
 /**
+ * Pre and vardump helper function.
+ */
+function prevd( $object, $label = NULL){
+  if ($label) echo "<div><span style=\"border:1px solid #ccc; font-size: 1.1em; font-family: monospace; font-weight:bold; color: #222; border-radius: 4px; padding:3px 10px; display:inline-block;margin-bottom: 10px;\">$label</span></div>";
+  echo '<pre>';
+  var_dump($object);
+  echo '</pre><br>';
+}
+
+/**
  * Begins execution of the plugin.
  *
  * Since everything within the plugin is registered via hooks,
@@ -83,3 +93,5 @@ function run_conphig() {
 
 }
 run_conphig();
+
+

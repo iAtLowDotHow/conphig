@@ -5,12 +5,12 @@
  * @link https://www.advancedcustomfields.com/resources/local-json/
  */
 
-add_filter( 'acf/json/load_paths', 'hows_ss_json_load_paths' );
-add_filter( 'acf/settings/save_json/type=acf-field-group', 'hows_ss_json_save_path_for_field_groups' );
-add_filter( 'acf/settings/save_json/type=acf-ui-options-page', 'hows_ss_json_save_path_for_option_pages' );
-add_filter( 'acf/settings/save_json/type=acf-post-type', 'hows_ss_json_save_path_for_post_types' );
-add_filter( 'acf/settings/save_json/type=acf-taxonomy', 'hows_ss_json_save_path_for_taxonomies' );
-add_filter( 'acf/json/save_file_name', 'hows_ss_json_filename', 10, 3 );
+add_filter( 'acf/json/load_paths', 'conphig_addon_acf_json_load_paths' );
+add_filter( 'acf/settings/save_json/type=acf-field-group', 'conphig_addon_acf_json_save_path_for_field_groups' );
+add_filter( 'acf/settings/save_json/type=acf-ui-options-page', 'conphig_addon_acf_json_save_path_for_option_pages' );
+add_filter( 'acf/settings/save_json/type=acf-post-type', 'conphig_addon_acf_json_save_path_for_post_types' );
+add_filter( 'acf/settings/save_json/type=acf-taxonomy', 'conphig_addon_acf_json_save_path_for_taxonomies' );
+add_filter( 'acf/json/save_file_name', 'conphig_addon_acf_json_filename', 10, 3 );
 
 /**
  * Set a custom ACF JSON load path.
@@ -23,11 +23,11 @@ add_filter( 'acf/json/save_file_name', 'hows_ss_json_filename', 10, 3 );
  *
  * @since 0.1.1
  */
-function hows_ss_json_load_paths( $paths ) {
-	$paths[] = HOWS_SS_PLUGIN_DIR . '/acf-json/field-groups';
-	$paths[] = HOWS_SS_PLUGIN_DIR . '/acf-json/options-pages';
-	$paths[] = HOWS_SS_PLUGIN_DIR . '/acf-json/post-types';
-	$paths[] = HOWS_SS_PLUGIN_DIR . '/acf-json/taxonomies';
+function conphig_addon_acf_json_load_paths( $paths ) {
+	$paths[] = ADDON_DIR_ACF . '/acf-json/field-groups';
+	$paths[] = ADDON_DIR_ACF . '/acf-json/options-pages';
+	$paths[] = ADDON_DIR_ACF . '/acf-json/post-types';
+	$paths[] = ADDON_DIR_ACF . '/acf-json/taxonomies';
 
 	return $paths;
 }
@@ -42,8 +42,8 @@ function hows_ss_json_load_paths( $paths ) {
  *
  * @since 0.1.1
  */
-function hows_ss_json_save_path_for_post_types() {
-	return HOWS_SS_PLUGIN_DIR . '/acf-json/post-types';
+function conphig_addon_acf_json_save_path_for_post_types() {
+	return ADDON_DIR_ACF . '/acf-json/post-types';
 }
 
 /**
@@ -56,8 +56,8 @@ function hows_ss_json_save_path_for_post_types() {
  *
  * @since 0.1.1
  */
-function hows_ss_json_save_path_for_field_groups() {
-	return HOWS_SS_PLUGIN_DIR . '/acf-json/field-groups';
+function conphig_addon_acf_json_save_path_for_field_groups() {
+	return ADDON_DIR_ACF . '/acf-json/field-groups';
 }
 
 /**
@@ -70,8 +70,8 @@ function hows_ss_json_save_path_for_field_groups() {
  *
  * @since 0.1.1
  */
-function hows_ss_json_save_path_for_taxonomies() {
-	return HOWS_SS_PLUGIN_DIR . '/acf-json/taxonomies';
+function conphig_addon_acf_json_save_path_for_taxonomies() {
+	return ADDON_DIR_ACF . '/acf-json/taxonomies';
 }
 
 /**
@@ -84,8 +84,8 @@ function hows_ss_json_save_path_for_taxonomies() {
  *
  * @since 0.1.1
  */
-function hows_ss_json_save_path_for_option_pages() {
-	return HOWS_SS_PLUGIN_DIR . '/acf-json/options-pages';
+function conphig_addon_acf_json_save_path_for_option_pages() {
+	return ADDON_DIR_ACF . '/acf-json/options-pages';
 }
 
 /**
@@ -100,7 +100,7 @@ function hows_ss_json_save_path_for_option_pages() {
  *
  * @since  0.1.1
  */
-function hows_ss_json_filename( $filename, $post ) {
+function conphig_addon_acf_json_filename( $filename, $post ) {
 	$filename = str_replace(
 		array(
 			' ',

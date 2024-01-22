@@ -5,9 +5,9 @@
  * @link https://www.advancedcustomfields.com/resources/blocks/
  */
 
-add_action( 'init', 'hows_ss_blocks_register', 5 );
-add_filter( 'block_categories_all', 'hows_ss_block_category' );
-add_filter( 'acf/blocks/no_fields_assigned_message', 'hows_ss_block_no_fields_msg', 10, 2 );
+add_action( 'init', 'conphig_addon_acf_blocks_register', 5 );
+add_filter( 'block_categories_all', 'conphig_addon_acf_block_category' );
+add_filter( 'acf/blocks/no_fields_assigned_message', 'conphig_addon_acf_block_no_fields_msg', 10, 2 );
 
 /**
  * Register our ACF Blocks.
@@ -18,8 +18,8 @@ add_filter( 'acf/blocks/no_fields_assigned_message', 'hows_ss_block_no_fields_ms
  *
  * @since 0.1.1
  */
-function hows_ss_blocks_register() {
-	$blocks = hows_ss_get_blocks();
+function conphig_addon_acf_blocks_register() {
+	$blocks = conphig_addon_acf_get_blocks();
 
 	/**
 	 * Loop through /block directory,
@@ -28,14 +28,14 @@ function hows_ss_blocks_register() {
 	 *   /block-two/block.json
 	 */
 	foreach ( $blocks as $block ) {
-		if ( file_exists( HOWS_SS_PLUGIN_BLOCKS . $block . '/block.json' ) ) {
+		if ( file_exists( ADDON_DIR_ACF . 'blocks/' . $block . '/block.json' ) ) {
 			/**
 			 * We register our block's with WordPress's handy
 			 * register_block_type();
 			 *
 			 * @link https://developer.wordpress.org/reference/functions/register_block_type/
 			 */
-			register_block_type( HOWS_SS_PLUGIN_BLOCKS . $block . '/block.json' );
+			register_block_type( ADDON_DIR_ACF . 'blocks/' . $block . '/block.json' );
 		}
 	}
 }
@@ -49,18 +49,18 @@ function hows_ss_blocks_register() {
  *
  * @since 0.1.1
  */
-function hows_ss_get_blocks() {
+function conphig_addon_acf_get_blocks() {
 	// Check for options.
-	$blocks  = get_option( 'hows_ss_blocks' );
-	$version = get_option( 'hows_ss_blocks_version' );
+	$blocks  = get_option( 'conphig_addon_acf_blocks' );
+	$version = get_option( 'conphig_addon_acf_blocks_version' );
 
-	if ( empty( $blocks ) || version_compare( HOWS_SS_VERSION, $version ) || ( function_exists( 'wp_get_environment_type' ) && 'production' !== wp_get_environment_type() ) ) {
-		$blocks = scandir( HOWS_SS_PLUGIN_BLOCKS );
+	if ( empty( $blocks ) || version_compare( CONPHIG_VERSION, $version ) || ( function_exists( 'wp_get_environment_type' ) && 'production' !== wp_get_environment_type() ) ) {
+		$blocks = scandir( ADDON_DIR_ACF . 'blocks/' );
 		$blocks = array_values( array_diff( $blocks, array( '..', '.', '.DS_Store' ) ) );
 
 		// Update our options.
-		update_option( 'hows_ss_blocks', $blocks );
-		update_option( 'hows_ss_blocks_version', HOWS_SS_VERSION );
+		update_option( 'conphig_addon_acf_blocks', $blocks );
+		update_option( 'conphig_addon_acf_blocks_version', CONPHIG_VERSION );
 	}
 
 	return $blocks;
@@ -77,7 +77,7 @@ function hows_ss_get_blocks() {
  *
  * @since 0.1.1
  */
-function hows_ss_block_category( $block_categories ) {
+function conphig_addon_acf_block_category( $block_categories ) {
 
 	$block_categories = array_merge(
 		array(
@@ -105,7 +105,7 @@ function hows_ss_block_category( $block_categories ) {
  *
  * @since 0.1.1
  */
-function hows_ss_block_no_fields_msg( $message, $block_name ) {
+function conphig_addon_acf_block_no_fields_msg( $message, $block_name ) {
 	if ( 'acf/phone-number' === $block_name ) {
 		$message = sprintf(
 			/* translators: %s: an admin URL to the field group edit screen */

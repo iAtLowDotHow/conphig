@@ -208,7 +208,7 @@ class Conphig {
 		$addonFolders = [];
 
 		// Get path to Addons namespace
-		$addonsPath = plugin_dir_path( dirname( __FILE__ ) ) . '/' . $namespace;
+		$addonsPath = plugin_dir_path( dirname( __FILE__ ) ) . $namespace;
 
 		// Scan directory for folders
 		$dir = new DirectoryIterator($addonsPath);
@@ -223,7 +223,12 @@ class Conphig {
 		foreach ($addonFolders as $addon) {
 			$className = '\\'.$namespace . '\\' . $addon .'\\Main';
 			if (class_exists($className)) {
-				$this->addon_loader->attach( new $className($this->core_loader) );
+
+				define("ADDON_DIR_".$addon, $addonsPath. '/'. $addon . '/');
+				define("ADDON_URL_".$addon, plugin_dir_url(dirname(__FILE__)) . "Addons/$addon/" );
+
+				$this->addon_loader->attach( new $className($this->loader) );
+
 			}
 		}
 

@@ -1,4 +1,4 @@
-<?php namespace Addons\Test;
+<?php namespace Addons\Resets;
 use Core\Observer as Observer;
 use Core\Loader as Loader;
 
@@ -19,10 +19,10 @@ class Main implements Observer
 		if( function_exists('acf_add_options_page') ) {
 
 			acf_add_options_page(array(
-				'page_title' 	=> 'CPMS General Settings',
-				'menu_title'	=> 'CPMS Settings',
-				'menu_slug' 	=> 'cpms-general-settings',
-				'capability'	=> 'edit_posts',
+				'page_title' 	=> 'Resets',
+				'menu_title'	=> 'Resets',
+				'menu_slug' 	=> 'conphig-resets',
+				'capability'	=> 'manage_options',
 				'redirect'		=> false
 			));
 
