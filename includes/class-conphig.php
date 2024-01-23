@@ -235,41 +235,41 @@ class Conphig {
 		$this->addon_loader->load();
 	}
 
-	private function requireFilesRecursively($folder, $filePattern){
-		$files = glob($folder . '/*', GLOB_ONLYDIR);
+	// private function requireFilesRecursively($folder, $filePattern){
+	// 	$files = glob($folder . '/*', GLOB_ONLYDIR);
 
-    foreach ($files as $childFolder) {
-			$filePattern_new = $childFolder . '/' . $filePattern;
-			$moduleFiles = glob($filePattern_new);
+  //   foreach ($files as $childFolder) {
+	// 		$filePattern_new = $childFolder . '/' . $filePattern;
+	// 		$moduleFiles = glob($filePattern_new);
 
-			foreach ($moduleFiles as $file) {
-				$namespace = $this->extractNamespaces($file);
+	// 		foreach ($moduleFiles as $file) {
+	// 			$namespace = $this->extractNamespaces($file);
 
-				if (!empty($namespace)) {
-					$this->namespaces[] = $namespace;
-				}
+	// 			if (!empty($namespace)) {
+	// 				$this->namespaces[] = $namespace;
+	// 			}
 
-				require_once $file;
-			}
+	// 			require_once $file;
+	// 		}
 
-			// Recursively search child folders
-			$this->requireFilesRecursively($childFolder, $filePattern);
-    }
-	}
+	// 		// Recursively search child folders
+	// 		$this->requireFilesRecursively($childFolder, $filePattern);
+  //   }
+	// }
 
 
 
-	private function extractNamespaces($file) {
-    $content = file_get_contents($file);
-    $matches = [];
+	// private function extractNamespaces($file) {
+  //   $content = file_get_contents($file);
+  //   $matches = [];
 
-    // Use regular expression to find the namespace declaration.
-    if (preg_match('/namespace\s+([^\s;]+);/', $content, $matches)) {
-      return $matches[1];
-    }
+  //   // Use regular expression to find the namespace declaration.
+  //   if (preg_match('/namespace\s+([^\s;]+);/', $content, $matches)) {
+  //     return $matches[1];
+  //   }
 
-    return ''; // Return an empty string if no namespace is found.
-	}
+  //   return ''; // Return an empty string if no namespace is found.
+	// }
 
 	/**
 	 * Run the loader to execute all of the hooks with WordPress.

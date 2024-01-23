@@ -103,7 +103,7 @@ class Conphig_Admin {
 	public function add_plugin_admin_menu() {
 		add_menu_page(
       'Conphig',
-      'Conphig',
+			'Conphig',
       'manage_options',
       'conphig',
       [$this,'conphig_dashboard_page'],

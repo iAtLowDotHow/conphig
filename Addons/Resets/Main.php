@@ -1,6 +1,7 @@
 <?php namespace Addons\Resets;
 use Core\Observer as Observer;
 use Core\Loader as Loader;
+use Addons\Resets\Features as Features;
 
 class Main implements Observer
 {
@@ -13,21 +14,13 @@ class Main implements Observer
 
 	public function handle()
 	{
-		// $this->loader
-		// ->add_action( 'template_redirect', $this, 'routing_rules' )
-		// ->add_action( 'admin_init', $this, 'restrict_admin_with_redirect', 1 );
-		if( function_exists('acf_add_options_page') ) {
 
-			acf_add_options_page(array(
-				'page_title' 	=> 'Resets',
-				'menu_title'	=> 'Resets',
-				'menu_slug' 	=> 'conphig-resets',
-				'capability'	=> 'manage_options',
-				'redirect'		=> false
-			));
+		$disable_emoji = new Features\DisableEmoji( $this->loader );
+		$this->loader->add_action( 'init', $disable_emoji, 'disable_emoji' );
 
-		}
+		$disable_jquery_migrate = new Features\DisableJqueryMigrate( $this->loader );
+		$this->loader->add_action( 'wp_default_scripts', $disable_jquery_migrate, 'disable_jquery_migrate' );
+
 		return $this;
 	}
-
 }
