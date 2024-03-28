@@ -28,14 +28,14 @@ function conphig_addon_acf_blocks_register() {
 	 *   /block-two/block.json
 	 */
 	foreach ( $blocks as $block ) {
-		if ( file_exists( ADDON_DIR_ACF . 'blocks/' . $block . '/block.json' ) ) {
+		if ( file_exists( ADDON_DIR_ACF . '/blocks/' . $block . '/block.json' ) ) {
 			/**
 			 * We register our block's with WordPress's handy
 			 * register_block_type();
 			 *
 			 * @link https://developer.wordpress.org/reference/functions/register_block_type/
 			 */
-			register_block_type( ADDON_DIR_ACF . 'blocks/' . $block . '/block.json' );
+			register_block_type( ADDON_DIR_ACF . '/blocks/' . $block . '/block.json' );
 		}
 	}
 }
@@ -55,7 +55,7 @@ function conphig_addon_acf_get_blocks() {
 	$version = get_option( 'conphig_addon_acf_blocks_version' );
 
 	if ( empty( $blocks ) || version_compare( CONPHIG_VERSION, $version ) || ( function_exists( 'wp_get_environment_type' ) && 'production' !== wp_get_environment_type() ) ) {
-		$blocks = scandir( ADDON_DIR_ACF . 'blocks/' );
+		$blocks = scandir( ADDON_DIR_ACF . '/blocks/' );
 		$blocks = array_values( array_diff( $blocks, array( '..', '.', '.DS_Store' ) ) );
 
 		// Update our options.

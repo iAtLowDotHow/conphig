@@ -13,20 +13,6 @@ class Main implements Observer
 
 	public function handle()
 	{
-		// $this->loader
-		// ->add_action( 'template_redirect', $this, 'routing_rules' )
-		// ->add_action( 'admin_init', $this, 'restrict_admin_with_redirect', 1 );
-		if( function_exists('acf_add_options_page') ) {
-
-			acf_add_options_page(array(
-				'page_title' 	=> 'CPMS General Settings',
-				'menu_title'	=> 'CPMS Settings',
-				'menu_slug' 	=> 'cpms-general-settings',
-				'capability'	=> 'edit_posts',
-				'redirect'		=> false
-			));
-
-		}
 		return $this;
 	}
 

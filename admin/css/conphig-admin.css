@@ -2,3 +2,31 @@
  * All of the CSS for your admin-specific functionality should be
  * included in this file.
  */
+/* @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap')
+
+:root{
+  --width-adminmenu: 200px;
+} */
+
+/* body{
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: <weight>;
+  font-style: normal;
+  font-variation-settings:
+    "slnt" 0;
+} */
+
+/* #adminmenu, #adminmenu .wp-submenu, #adminmenuback, #adminmenuwrap{
+  font-family: ;
+  font-size: 12px;
+  width: var(--width-adminmenu);
+}
+
+#wpcontent, #wpfooter{
+  margin-left: var(--width-adminmenu);
+}
+
+#adminmenu .wp-submenu-head, #adminmenu a.menu-top{
+  font-size: 12px;
+} */

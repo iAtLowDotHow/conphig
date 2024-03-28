@@ -1,4 +1,6 @@
-<?php namespace Addons\ACF;
+<?php
+
+namespace Addons\ACF;
 use Core\Observer as Observer;
 use Core\Loader as Loader;
 

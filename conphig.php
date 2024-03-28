@@ -14,7 +14,7 @@
  *
  * @wordpress-plugin
  * Plugin Name:       Conphig
- * Plugin URI:        https://components.low.how/conphig
+ * xx Plugin URI:        https://components.low.how/conphig
  * Description:       Standard configuration for all WordPress in-HOWS setup.
  * Version:           1.0.0
  * Author:            How
@@ -25,7 +25,7 @@
  * Domain Path:       /languages
  */
 // If this file is called directly, abort.
-if ( ! defined( 'WPINC' ) ) {
+if (!defined('WPINC')) {
 	die;
 }
 
@@ -34,14 +34,66 @@ if ( ! defined( 'WPINC' ) ) {
  * Start at version 1.0.0 and use SemVer - https://semver.org
  * Rename this for your plugin and update it as you release new versions.
  */
-define( 'CONPHIG_VERSION', '1.0.0' );
+define('CONPHIG_VERSION', '1.0.0');
+define('CONPHIG_DIR', plugin_dir_path(__FILE__));
+define('CONPHIG_ROOT_FILE', __FILE__);
+define('CONPHIG_ROOT_FILE_RELATIVE_PATH', plugin_basename(__FILE__));
+define('CONPHIG_SLUG', 'conphig');
+define('CONPHIG_MENU_SLUG', CONPHIG_SLUG);
+define('CONPHIG_FOLDER', dirname(plugin_basename(__FILE__)));
+define('CONPHIG_URL', plugins_url('', __FILE__));
+
+require_once CONPHIG_DIR . '/includes/functions/index.php';
+
+$conphig_autoloader = CONPHIG_DIR . 'vendor/autoload_packages.php';
+if (is_readable($conphig_autoloader)) {
+	require_once $conphig_autoloader;
+
+} else { // Something very unexpected. Error out gently with an admin_notice and exit loading.
+	if (defined('WP_DEBUG') && WP_DEBUG) {
+		error_log( // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
+			__('Error loading autoloader file for Conphig plugin', 'conphig')
+		);
+	}
+
+	add_action(
+		'admin_notices',
+		function () {
+?>
+		<div class="notice notice-error is-dismissible">
+			<p>
+				<?php
+				printf(
+					wp_kses(
+						/* translators: Placeholder is a link to a support document. */
+						__('Your installation of Conphig is incomplete. If you installed Conphig from GitHub, please refer to <a href="%1$s" target="_blank" rel="noopener noreferrer">this document</a> to set up your development environment. Conphig must have Composer dependencies installed and built via the build command.', 'conphig'),
+						array(
+							'a' => array(
+								'href'   => array(),
+								'target' => array(),
+								'rel'    => array(),
+							),
+						)
+					),
+					'https://github.com/'
+				);
+				?>
+			</p>
+		</div>
+		<?php
+		}
+	);
+
+	return;
+}
 
 /**
  * The code that runs during plugin activation.
  * This action is documented in includes/class-conphig-activator.php
  */
-function activate_conphig() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-conphig-activator.php';
+function activate_conphig()
+{
+	require_once plugin_dir_path(__FILE__) . 'includes/class-conphig-activator.php';
 	Conphig_Activator::activate();
 }
 
@@ -49,29 +101,21 @@ function activate_conphig() {
  * The code that runs during plugin deactivation.
  * This action is documented in includes/class-conphig-deactivator.php
  */
-function deactivate_conphig() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-conphig-deactivator.php';
+function deactivate_conphig()
+{
+	require_once plugin_dir_path(__FILE__) . 'includes/class-conphig-deactivator.php';
 	Conphig_Deactivator::deactivate();
 }
 
-register_activation_hook( __FILE__, 'activate_conphig' );
-register_deactivation_hook( __FILE__, 'deactivate_conphig' );
+register_activation_hook(__FILE__, 'activate_conphig');
+register_deactivation_hook(__FILE__, 'deactivate_conphig');
 
 /**
  * The core plugin class that is used to define internationalization,
  * admin-specific hooks, and public-facing site hooks.
  */
-require plugin_dir_path( __FILE__ ) . 'includes/class-conphig.php';
+require plugin_dir_path(__FILE__) . 'includes/class-conphig.php';
 
-/**
- * Pre and vardump helper function.
- */
-function prevd( $object, $label = NULL){
-  if ($label) echo "<div><span style=\"border:1px solid #ccc; font-size: 1.1em; font-family: monospace; font-weight:bold; color: #222; border-radius: 4px; padding:3px 10px; display:inline-block;margin-bottom: 10px;\">$label</span></div>";
-  echo '<pre>';
-  var_dump($object);
-  echo '</pre><br>';
-}
 
 /**
  * Begins execution of the plugin.
@@ -82,16 +126,14 @@ function prevd( $object, $label = NULL){
  *
  * @since    1.0.0
  */
-function run_conphig() {
+function run_conphig()
+{
 	/**
 	 * Bootstrapping Composer Autoloading for namespaces
 	 */
-	require plugin_dir_path( __FILE__ ) . 'vendor/autoload.php';
+	require plugin_dir_path(__FILE__) . 'vendor/autoload_packages.php';
 
 	$plugin = new Conphig();
 	$plugin->run();
-
 }
 run_conphig();
-
-

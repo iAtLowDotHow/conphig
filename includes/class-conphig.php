@@ -61,6 +61,7 @@ class Conphig {
 
 
 	protected $core_loader;
+	protected $addon_loader;
 
 	/**
 	 * Define the core functionality of the plugin.
@@ -205,71 +206,70 @@ class Conphig {
 		$namespace = 'Addons';
 
 		$this->addon_loader = new Core\AddonLoader();
-		$addonFolders = [];
+		/**
+		 * Autoload all Addons
+		 * Scan the Addons directory for folders and load their Main class.
+		 */
+		// $addonFolders = [];
 
-		// Get path to Addons namespace
-		$addonsPath = plugin_dir_path( dirname( __FILE__ ) ) . $namespace;
+		// // Get path to Addons namespace
+		// $addonsPath = plugin_dir_path( dirname( __FILE__ ) ) . $namespace;
 
-		// Scan directory for folders
-		$dir = new DirectoryIterator($addonsPath);
-		foreach ($dir as $fileInfo) {
-			if($fileInfo->isDir() && !$fileInfo->isDot()) {
-				$addonFolders[] = $fileInfo->getFilename();
-			}
+		// // Scan directory for folders
+		// $dir = new DirectoryIterator($addonsPath);
+		// foreach ($dir as $fileInfo) {
+		// 	if($fileInfo->isDir() && !$fileInfo->isDot()) {
+		// 		$addonFolders[] = $fileInfo->getFilename();
+		// 	}
+		// }
+
+		// sort($addonFolders);
+
+		// foreach ($addonFolders as $addon) {
+		// 	$className = '\\'.$namespace . '\\' . $addon .'\\Main';
+		// 	if (class_exists($className)) {
+
+
+		// 		define("ADDON_DIR_".$addon, $addonsPath. '/'. $addon . '/');
+		// 		define("ADDON_URL_".$addon, plugin_dir_url(dirname(__FILE__)) . "Addons/$addon/" );
+
+		// 		$this->addon_loader->attach( new $className($this->loader) );
+
+		// 	}
+		// }
+
+		/** Addons: Site Settings */
+		if (class_exists(Addons\SiteSettings\Main::class)) {
+			define("ADDON_SLUG_SITESETTINGS", CONPHIG_SLUG . '-sitesettings');
+			define("ADDON_DIR_SITESETTINGS", trailingslashit(CONPHIG_DIR) . 'Addons/SiteSettings');
+			define("ADDON_URL_SITESETTINGS", trailingslashit(CONPHIG_URL) . 'Addons/SiteSettings');
+			$this->addon_loader->attach(new Addons\SiteSettings\Main($this->loader));
 		}
 
-		sort($addonFolders);
-
-		foreach ($addonFolders as $addon) {
-			$className = '\\'.$namespace . '\\' . $addon .'\\Main';
-			if (class_exists($className)) {
-
-				define("ADDON_DIR_".$addon, $addonsPath. '/'. $addon . '/');
-				define("ADDON_URL_".$addon, plugin_dir_url(dirname(__FILE__)) . "Addons/$addon/" );
-
-				$this->addon_loader->attach( new $className($this->loader) );
-
-			}
+		/** Addons: ACF */
+		if ( class_exists( Addons\ACF\Main::class ) ) {
+			define("ADDON_SLUG_ACF", CONPHIG_SLUG . '-acf');
+			define("ADDON_DIR_ACF", trailingslashit( CONPHIG_DIR ) . 'Addons/ACF' );
+			define("ADDON_URL_ACF", trailingslashit( CONPHIG_URL ) . 'Addons/ACF' );
+			$this->addon_loader->attach( new Addons\ACF\Main( $this->loader ) );
 		}
+
+		/** Addons: Resets */
+		if (class_exists(Addons\Resets\Main::class)) {
+			define("ADDON_SLUG_RESETS", CONPHIG_SLUG . '-resets');
+			define("ADDON_DIR_RESETS", trailingslashit(CONPHIG_DIR) . 'Addons/Resets');
+			define("ADDON_URL_RESETS", trailingslashit(CONPHIG_URL) . 'Addons/Resets');
+			$this->addon_loader->attach(new Addons\Resets\Main($this->loader));
+		}
+
+
+
+
 
 		$this->addon_loader->load();
+
 	}
 
-	// private function requireFilesRecursively($folder, $filePattern){
-	// 	$files = glob($folder . '/*', GLOB_ONLYDIR);
-
-  //   foreach ($files as $childFolder) {
-	// 		$filePattern_new = $childFolder . '/' . $filePattern;
-	// 		$moduleFiles = glob($filePattern_new);
-
-	// 		foreach ($moduleFiles as $file) {
-	// 			$namespace = $this->extractNamespaces($file);
-
-	// 			if (!empty($namespace)) {
-	// 				$this->namespaces[] = $namespace;
-	// 			}
-
-	// 			require_once $file;
-	// 		}
-
-	// 		// Recursively search child folders
-	// 		$this->requireFilesRecursively($childFolder, $filePattern);
-  //   }
-	// }
-
-
-
-	// private function extractNamespaces($file) {
-  //   $content = file_get_contents($file);
-  //   $matches = [];
-
-  //   // Use regular expression to find the namespace declaration.
-  //   if (preg_match('/namespace\s+([^\s;]+);/', $content, $matches)) {
-  //     return $matches[1];
-  //   }
-
-  //   return ''; // Return an empty string if no namespace is found.
-	// }
 
 	/**
 	 * Run the loader to execute all of the hooks with WordPress.
