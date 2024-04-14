@@ -1,4 +1,4 @@
-<?php namespace Core;
+<?php namespace Conphig\Core;
 
 class Loader
 {
@@ -10,7 +10,7 @@ class Loader
 
 	    $this->actions = array();
 	    $this->filters = array();
-	    $this->removable_actions = array();
+	    $this->actions_to_be_removed = array();
 	}
 
 	/**
@@ -52,7 +52,7 @@ class Loader
 	 */
 	public function remove_action( $tag, $function_to_remove, $priority = 10 )
 	{
-		$this->removable_actions[] = array( 'tag' => $tag, 'function_to_remove' => $function_to_remove, 'priority' => $priority );
+		$this->actions_to_be_removed[] = array( 'tag' => $tag, 'function_to_remove' => $function_to_remove, 'priority' => $priority );
 
 		return $this;
 	}
@@ -104,7 +104,7 @@ class Loader
 	        // var_dump($hook);
 	    }
 
-	    foreach ( $this->removable_actions as $hook )
+	    foreach ( $this->actions_to_be_removed as $hook )
 	    {
 	    	remove_action( $hook['tag'], $hook['function_to_remove'], $hook['priority'] );
 	    }

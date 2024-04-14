@@ -34,18 +34,19 @@ if (!defined('WPINC')) {
  * Start at version 1.0.0 and use SemVer - https://semver.org
  * Rename this for your plugin and update it as you release new versions.
  */
-define('CONPHIG_VERSION', '1.0.0');
-define('CONPHIG_DIR', plugin_dir_path(__FILE__));
-define('CONPHIG_ROOT_FILE', __FILE__);
-define('CONPHIG_ROOT_FILE_RELATIVE_PATH', plugin_basename(__FILE__));
-define('CONPHIG_SLUG', 'conphig');
-define('CONPHIG_MENU_SLUG', CONPHIG_SLUG);
-define('CONPHIG_FOLDER', dirname(plugin_basename(__FILE__)));
-define('CONPHIG_URL', plugins_url('', __FILE__));
 
-require_once CONPHIG_DIR . '/includes/functions/index.php';
+// define('CONPHIG_VERSION', '1.0.0');
+// define('CONPHIG_DIR', plugin_dir_path(__FILE__));
+// define('CONPHIG_ROOT_FILE', __FILE__);
+// define('CONPHIG_ROOT_FILE_RELATIVE_PATH', plugin_basename(__FILE__));
+// define('CONPHIG_SLUG', 'conphig');
+// define('CONPHIG_MENU_SLUG', CONPHIG_SLUG);
+// define('CONPHIG_FOLDER', dirname(plugin_basename(__FILE__)));
+// define('CONPHIG_URL', plugins_url('', __FILE__));
 
-$conphig_autoloader = CONPHIG_DIR . 'vendor/autoload_packages.php';
+require_once plugin_dir_path(__FILE__) . 'Core/includes/functions/index.php';
+
+$conphig_autoloader = plugin_dir_path(__FILE__) . 'vendor/autoload_packages.php';
 if (is_readable($conphig_autoloader)) {
 	require_once $conphig_autoloader;
 
@@ -87,13 +88,15 @@ if (is_readable($conphig_autoloader)) {
 	return;
 }
 
+
+
 /**
  * The code that runs during plugin activation.
  * This action is documented in includes/class-conphig-activator.php
  */
 function activate_conphig()
 {
-	require_once plugin_dir_path(__FILE__) . 'includes/class-conphig-activator.php';
+	require_once plugin_dir_path(__FILE__) . '/Core/includes/class-conphig-activator.php';
 	Conphig_Activator::activate();
 }
 
@@ -103,18 +106,12 @@ function activate_conphig()
  */
 function deactivate_conphig()
 {
-	require_once plugin_dir_path(__FILE__) . 'includes/class-conphig-deactivator.php';
+	require_once plugin_dir_path(__FILE__) . '/Core/includes/class-conphig-deactivator.php';
 	Conphig_Deactivator::deactivate();
 }
 
 register_activation_hook(__FILE__, 'activate_conphig');
 register_deactivation_hook(__FILE__, 'deactivate_conphig');
-
-/**
- * The core plugin class that is used to define internationalization,
- * admin-specific hooks, and public-facing site hooks.
- */
-require plugin_dir_path(__FILE__) . 'includes/class-conphig.php';
 
 
 /**
@@ -131,9 +128,10 @@ function run_conphig()
 	/**
 	 * Bootstrapping Composer Autoloading for namespaces
 	 */
-	require plugin_dir_path(__FILE__) . 'vendor/autoload_packages.php';
+	require_once plugin_dir_path(__FILE__) . 'Core/includes/class-conphig.php';
+	if (class_exists('Conphig')) {
+		(new Conphig())->run();
+	}
 
-	$plugin = new Conphig();
-	$plugin->run();
 }
 run_conphig();

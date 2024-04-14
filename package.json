@@ -6,14 +6,16 @@
 	"scripts": {
 		"install-scripts": "composer install && npm install",
 		"dev:blocks": "wp-scripts start",
-		"dev:dashboard": "wp-scripts start --webpack-src-dir=src/dashboard --output-path=build/dashboard",
+		"dev:dashboard": "wp-scripts start --webpack-src-dir=Core/Admin/modern/src/dashboard --output-path=Core/Admin/modern/build/dashboard",
+		"dev:test": "wp-scripts start --webpack-src-dir=Core/Admin/modern/src/test --output-path=Core/Admin/modern/build/test",
 		"dev:php": "composer install",
-		"start:admin-sass": "sass admin/src/scss/index.scss:admin/src/index.css --watch",
-		"build:admin-sass": "sass admin/src/scss/index.scss:admin/src/index.css",
-		"build:blocks": "wp-scripts build --webpack-src-dir=src/blocks --output-path=build/blocks",
-		"build:dashboard": "wp-scripts build --webpack-src-dir=src/dashboard --output-path=build/dashboard",
-		"build:admin": "sass admin/src/scss/index.scss:admin/src/index.css && wp-scripts build --webpack-src-dir=admin/src --output-path=admin/build",
-		"build:all": "composer install --no-dev && npm run build:blocks && npm run build:dashboard && npm run build:admin",
+		"start:admin-sass": "sass Core/Admin/classic/src/scss/index.scss:Core/Admin/classic/src/index.css --watch",
+		"build:admin-sass": "sass Core/Admin/classic/src/scss/index.scss:Core/Admin/classic/src/index.css",
+		"build:blocks": "wp-scripts build --webpack-src-dir=Core/Admin/modern/src/blocks --output-path=Core/Admin/modern/build/blocks",
+		"build:dashboard": "wp-scripts build --webpack-src-dir=Core/Admin/modern/src/dashboard --output-path=Core/Admin/modern/build/dashboard",
+		"build:test": "wp-scripts build --webpack-src-dir=Core/Admin/modern/src/test --output-path=Core/Admin/modern/build/test",
+		"build:admin": "npm run build:admin-sass && wp-scripts build --webpack-src-dir=Core/Admin/classic/src --output-path=Core/Admin/classic/build",
+		"build:all": "composer install --no-dev && npm run build:blocks && npm run build:dashboard && npm run build:admin && npm run build:test",
 		"format": "wp-scripts format",
 		"lint:css": "wp-scripts lint-style",
 		"lint:js": "wp-scripts lint-js",
@@ -26,9 +28,13 @@
 	"license": "GPLv2 or later",
 	"devDependencies": {
 		"@tailwindcss/forms": "^0.5.4",
+		"@types/node": "^20.11.30",
+		"@types/react": "^18.2.73",
+		"@types/react-dom": "^18.2.23",
 		"@wordpress/scripts": "^26.6.0",
 		"autoprefixer": "^10.4.14",
-		"tailwindcss": "^3.4.1"
+		"tailwindcss": "^3.4.1",
+		"typescript": "^5.4.3"
 	},
 	"dependencies": {
 		"@headlessui/react": "^1.7.15",

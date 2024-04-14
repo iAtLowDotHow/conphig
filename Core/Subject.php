@@ -1,4 +1,4 @@
-<?php namespace Core;
+<?php namespace Conphig\Core;
 
 interface Subject
 {

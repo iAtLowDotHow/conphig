@@ -9,8 +9,7 @@
 	"license": "GPL v2 or later",
 	"autoload": {
 		"psr-4": {
-			"Addons\\": "Addons/",
-			"Core\\": "Core/"
+			"Conphig\\": "."
 		}
 	},
 	"require-dev": {
