@@ -35,15 +35,6 @@ if (!defined('WPINC')) {
  * Rename this for your plugin and update it as you release new versions.
  */
 
-// define('CONPHIG_VERSION', '1.0.0');
-// define('CONPHIG_DIR', plugin_dir_path(__FILE__));
-// define('CONPHIG_ROOT_FILE', __FILE__);
-// define('CONPHIG_ROOT_FILE_RELATIVE_PATH', plugin_basename(__FILE__));
-// define('CONPHIG_SLUG', 'conphig');
-// define('CONPHIG_MENU_SLUG', CONPHIG_SLUG);
-// define('CONPHIG_FOLDER', dirname(plugin_basename(__FILE__)));
-// define('CONPHIG_URL', plugins_url('', __FILE__));
-
 require_once plugin_dir_path(__FILE__) . 'Core/includes/functions/index.php';
 
 $conphig_autoloader = plugin_dir_path(__FILE__) . 'vendor/autoload_packages.php';

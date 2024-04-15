@@ -1,6 +1,7 @@
 <?php
 namespace Conphig\Extensions\ACF;
 use Conphig\Core\Observer as Observer;
+use Conphig\Core\Loader as Loader;
 
 
 class Main implements Observer
@@ -8,7 +9,7 @@ class Main implements Observer
 	private $loader;
 	public const EXT_NAME = 'acf';
 
-	public function __construct( $loader )
+	public function __construct(Loader $loader)
 	{
 		// Set custom load & save JSON points for ACF sync.
 		require 'includes/acf-json.php';
