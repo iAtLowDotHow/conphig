@@ -1,4 +1,4 @@
-<?php namespace Addons\Resets\Features;
+<?php namespace Conphig\Extensions\Resets\Features;
 
 class DisableJqueryMigrate{
 

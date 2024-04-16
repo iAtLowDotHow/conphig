@@ -102,8 +102,10 @@ class Conphig {
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
 		$this->attach_core_loadables();
-		$this->attach_extensions();
 		$this->loader->run();
+
+		$this->attach_extensions();
+
 	}
 
 	/**
@@ -214,82 +216,7 @@ class Conphig {
 	 */
 	private function attach_extensions() {
 
-		$this->extensions_loader = new Core\ExtensionsLoader();
-		/**
-		 * Autoload all Addons
-		 * Scan the Addons directory for folders and load their Main class.
-		 */
-		// $addonFolders = [];
-
-		// // Get path to Addons namespace
-		// $addonsPath = plugin_dir_path( dirname( __FILE__ ) ) . $namespace;
-
-		// // Scan directory for folders
-		// $dir = new DirectoryIterator($addonsPath);
-		// foreach ($dir as $fileInfo) {
-		// 	if($fileInfo->isDir() && !$fileInfo->isDot()) {
-		// 		$addonFolders[] = $fileInfo->getFilename();
-		// 	}
-		// }
-
-		// sort($addonFolders);
-
-		// foreach ($addonFolders as $addon) {
-		// 	$className = '\\'.$namespace . '\\' . $addon .'\\Main';
-		// 	if (class_exists($className)) {
-
-
-		// 		define("ADDON_DIR_".$addon, $addonsPath. '/'. $addon . '/');
-		// 		define("ADDON_URL_".$addon, plugin_dir_url(dirname(__FILE__)) . "Addons/$addon/" );
-
-		// 		$this->extensions_loader->attach( new $className($this->loader) );
-
-		// 	}
-		// }
-
-		/** Addons: Site Settings */
-		// if (class_exists(Addons\SiteSettings\Main::class)) {
-		// 	define("ADDON_SLUG_SITESETTINGS", CONPHIG_SLUG . '-sitesettings');
-		// 	define("ADDON_DIR_SITESETTINGS", trailingslashit(CONPHIG_DIR) . 'Addons/SiteSettings');
-		// 	define("ADDON_URL_SITESETTINGS", trailingslashit(CONPHIG_URL) . 'Addons/SiteSettings');
-		// 	$this->extensions_loader->attach(new Addons\SiteSettings\Main($this->loader));
-		// }
-
-		/** Addons: Test */
-		// if (class_exists(Addons\Test\Main::class)) {
-		// 	define("ADDON_SLUG_TEST", CONPHIG_SLUG . '-test');
-		// 	define("ADDON_DIR_TEST", trailingslashit(CONPHIG_DIR) . 'Addons/Test');
-		// 	define("ADDON_URL_TEST", trailingslashit(CONPHIG_URL) . 'Addons/Test');
-		// 	$this->extensions_loader->attach(new Addons\Test\Main($this->loader));
-		// }
-
-		/** Addons: ACF */
-		if ( class_exists( Ext\ACF\Main::class ) ) {
-			$acf = new Ext\ACF\Main( $this->loader );
-			$this->extensions_loader->attach( $acf );
-		}
-
-		/** Addons: Resets */
-		// if (class_exists(Addons\Resets\Main::class)) {
-		// 	define("ADDON_SLUG_RESETS", CONPHIG_SLUG . '-resets');
-		// 	define("ADDON_DIR_RESETS", trailingslashit(CONPHIG_DIR) . 'Addons/Resets');
-		// 	define("ADDON_URL_RESETS", trailingslashit(CONPHIG_URL) . 'Addons/Resets');
-		// 	$this->extensions_loader->attach(new Addons\Resets\Main($this->loader));
-		// }
-
-		/** Addons: Docs */
-		// if (class_exists(Addons\Docs\Main::class)) {
-		// 	define("ADDON_SLUG_DOCS", CONPHIG_SLUG . '-docs');
-		// 	define("ADDON_DIR_DOCS", trailingslashit(CONPHIG_DIR) . 'Addons/Docs');
-		// 	define("ADDON_URL_DOCS", trailingslashit(CONPHIG_URL) . 'Addons/Docs');
-		// 	$this->extensions_loader->attach(new Addons\Docs\Main($this->loader));
-		// }
-
-
-
-
-
-		$this->extensions_loader->load();
+		$ext_instance = new Ext\Compiler($this->core_loader);
 
 	}
 

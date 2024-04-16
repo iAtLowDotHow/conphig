@@ -1,4 +1,4 @@
-<?php namespace Addons\Resets\Features;
+<?php namespace Conphig\Extensions\Resets\Features;
 
 class DisableEmoji{
 
@@ -10,7 +10,7 @@ class DisableEmoji{
 		remove_filter( 'wp_mail', 'wp_staticize_emoji_for_email' );
 		remove_filter( 'the_content_feed', 'wp_staticize_emoji' );
 		remove_filter( 'comment_text_rss', 'wp_staticize_emoji' );
-    add_action( 'admin_init', [ $this, 'disable_admin_emojis' ] );
+    add_action( 'admin_init', array( $this, 'disable_admin_emojis' ) );
 		add_filter( 'emoji_svg_url', '__return_false' );
     add_filter( 'tiny_mce_plugins',[$this, 'disable_emojis_tinymce'] );
 	  add_filter( 'wp_resource_hints', [$this, 'disable_emojis_remove_dns_prefetch'], 10, 2 );
