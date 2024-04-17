@@ -126,3 +126,5 @@ function run_conphig()
 
 }
 run_conphig();
+var_dump(WP_POST_REVISIONS);
+exit;

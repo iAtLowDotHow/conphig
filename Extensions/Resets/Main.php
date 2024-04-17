@@ -15,6 +15,8 @@ class Main implements Observer
 
 	public function handle()
 	{
+		$limit_revisions = new Features\LimitRevisions();
+		$limit_revisions->set_max(3);
 
 		$disable_emoji = new Features\DisableEmoji();
 		$this->loader->add_action('init', $disable_emoji, 'disable_emoji');
