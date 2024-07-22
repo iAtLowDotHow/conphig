@@ -93,16 +93,19 @@ class Conphig_Admin
 		$this->view_dir = plugin_dir_path(__FILE__) . '/view';
 
 		$this->menu = array(
-			'page_title'	=> 'Menu Page Title',
-			'menu_title'	=> 'Menu Title',
+			'page_title'	=> 'Conphig',
+			'menu_title'	=> 'Conphig',
 			'menu_slug'	=> Conphig::ADMIN_MENU_SLUG,
 			'icon_url'	=> "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzNTQuMzMgMzU0LjMzIj48cGF0aCBkPSJNMjcwLjI1LDIwOGE5MC4zNSw5MC4zNSwwLDEsMSwuMy02Ni4zN2w2MS44NC0yNC41M2ExNTYuODcsMTU2Ljg3LDAsMSwwLC4xNiwxMTUuMzRaIiBzdHlsZT0iZmlsbDojMjMxZjIwIi8+PHBhdGggZD0iTTE2Mi42LDIwMi42N2EyOS45MSwyOS45MSwwLDAsMS0yMS4xNS01MUEyOC43NiwyOC43NiwwLDAsMSwxNjIuNiwxNDNoNDkuNzZhMjkuOTEsMjkuOTEsMCwwLDEsMjEuMTYsNTEsMjguOCwyOC44LDAsMCwxLTIxLjE2LDguNzFabTAtOS45NWg0OS43NmExOS45MSwxOS45MSwwLDAsMCwwLTM5LjgySDE2Mi42YTE5LjkxLDE5LjkxLDAsMCwwLDAsMzkuODJabTQ5Ljc2LTVhMTQuODksMTQuODksMCwxLDAtMTAuNTctNC4zNkExNC4zOCwxNC4zOCwwLDAsMCwyMTIuMzYsMTg3Ljc0WiIgc3R5bGU9ImZpbGw6IzAxMDEwMSIvPjwvc3ZnPg==",
+			'submenu_title'	=> 'Dashboard',
+			'submenu_slug'	=> Conphig::ADMIN_MENU_SLUG . $this->slug_delimiter . 'dashboard',
+			'position'	=> '2.5',
 		);
 	}
 
 
 	/**
-	 * Undocumented function
+	 * Add a plugin default admin menu.
 	 *
 	 * @return void
 	 */
@@ -110,20 +113,38 @@ class Conphig_Admin
 	{
 		$page_title = $this->menu['page_title'];
 		$menu_title = $this->menu['menu_title'];
-		$menu_slug = $this->menu['menu_slug'];
+		$parent_slug = $menu_slug = $this->menu['menu_slug'];
 		$menu_icon = $this->menu['icon_url'];
+		$submenu_title = $this->menu['submenu_title'];
+		$submenu_slug = $this->menu['submenu_slug'];
+		$menu_position = $this->menu['position'];
 
-		$page_hook_suffix = add_menu_page(
+		$page_hook_suffix_top = add_menu_page(
 			$page_title,
 			$menu_title,
 			'manage_options',
 			$menu_slug,
 			array($this, 'render_admin_page'),
-			$menu_icon
+			$menu_icon,
+			$menu_position
 		);
 
+		$page_hook_suffix_sub_default = add_submenu_page(
+			$parent_slug,
+			$page_title,
+			$submenu_title,
+			'manage_options',
+			$submenu_slug,
+			array($this, 'render_admin_page')
+		);
+
+		remove_submenu_page($menu_slug, $menu_slug);
+
 		// Register dashboard hooks.
-		add_action('load-' . $page_hook_suffix, array($this, 'admin_page_init'));
+		add_action('load-' . $page_hook_suffix_top, array($this, 'admin_page_init'));
+		add_action('load-' . $page_hook_suffix_sub_default, array($this, 'admin_page_init'));
+
+		// add_action('admin_init', array($this, 'enqueue_general_admin_styles_scripts') );
 	}
 
 
@@ -141,17 +162,15 @@ class Conphig_Admin
 	 */
 	public function enqueue_admin_styles_scripts()
 	{
+
 		wp_register_style(
 			$this->style_handle,
 			$this->build_url . '/index.css',
 			array(),
 			$this->asset_file['version']
 		);
+		wp_enqueue_style($this->style_handle);
 
-
-		// if (isset($_GET['page']) && $_GET['page'] == 'conphig') {
-			wp_enqueue_style($this->style_handle);
-		// }
 
 		wp_enqueue_script(
 			$this->script_handle,
@@ -166,5 +185,18 @@ class Conphig_Admin
 	public function render_admin_page()
 	{
 		require_once $this->view_dir. '/dashboard.php';
+	}
+
+
+
+	public function enqueue_general_admin_styles_scripts()
+	{
+		wp_register_style(
+			$this->style_handle . "met_tw",
+			trailingslashit(WP_CONTENT_URL) . 'mu-plugins/conphig/assets/css/styles.css',
+			array(),
+			'3.4.4'
+		);
+		wp_enqueue_style($this->style_handle);
 	}
 }

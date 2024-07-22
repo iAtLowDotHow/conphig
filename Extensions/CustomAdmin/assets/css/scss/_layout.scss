@@ -1,0 +1,65 @@
+body.conphig-admin{
+  font-family: var(--conphig-font-family);
+
+  #screen-meta-links {
+    .show-settings,
+    .show-settings:focus{
+      border-width: 0px;
+      outline: none;
+      box-shadow: none;
+    }
+  }
+
+  #screen-meta {
+    border-width: 0px;
+    outline: none;
+    border-radius: var(--conphig-border-radius-md);
+  }
+
+  #contextual-help-wrap h5,
+  #screen-options-wrap h5,
+  #screen-options-wrap legend{
+    padding-bottom: 0;
+    margin-bottom: calc( var(--conphig-spacing-1) * -1 );
+    text-transform: uppercase;
+    font-size: var(--conphig-table-font-size-sm);
+    font-weight: var(--conphig-font-weight-bolder);
+    letter-spacing: 1px;
+  }
+
+  #message{
+    border-width: 0px 0px 0px 4px;
+    outline: none;
+    border-radius: var(--conphig-border-radius-md);
+    font-size: var(--conphig-table-font-size);
+  }
+
+  .subsubsub{
+    margin-top: var(--conphig-spacing-2);
+    font-size: var(--conphig-table-font-size);
+
+    li{
+      // opacity: 0.5;
+      &:hover{
+        opacity: 1;
+      }
+
+      a{
+        transition: all 0.15s ease-in-out;
+        &.current{
+          opacity: 1;
+        }
+      }
+      &:hover{
+        opacity: var(--conphig-adminmenu-opaque);
+      }
+    }
+    a{
+
+
+
+    }
+
+  }
+}
+

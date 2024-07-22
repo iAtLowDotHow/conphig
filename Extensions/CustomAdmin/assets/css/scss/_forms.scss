@@ -1,0 +1,109 @@
+body.conphig-admin{
+
+  /** Forms */
+  input[type=color], input[type=date], input[type=datetime-local], input[type=datetime], input[type=email], input[type=month], input[type=number], input[type=password], input[type=search], input[type=tel], input[type=text], input[type=time], input[type=url], input[type=week], select, textarea{
+    border-color: var(--tw-gray-400-light);
+    border-radius: var(--conphig-border-radius-md);
+  }
+
+  .wrap {
+    .add-new-h2,
+    .add-new-h2:active,
+    .page-title-action,
+    .page-title-action:active{
+      border-radius: var(--conphig-border-radius-md);
+      padding: var(--conphig-spacing-0) var(--conphig-spacing-3);
+      color: var(--tw-light-light);
+      background-color: var(--conphig-btn-border-color);
+      &:hover{
+        background-color: var(--conphig-btn-hover-color);
+      }
+    }
+  }
+
+  /** Buttons */
+  &.wp-core-ui {
+    .button,
+    .button-primary,
+    .button-secondary{
+      border-radius: var(--conphig-border-radius-md);
+      font-size: var(--conphig-btn-font-size);
+      transition: all 0.15s ease-in-out;
+      background: var(--conphig-btn-bg);
+
+      &:hover{
+        color: var(--conphig-btn-hover-color);
+        background-color: var(--conphig-btn-hover-bg);
+        border-color: var(--conphig-btn-hover-border-color);
+        transition: all 0.15s ease-in-out;
+      }
+    }
+    .button-primary{
+      background-color: var(--conphig-btn-border-color);
+      &:hover{
+        background-color: var(--conphig-btn-hover-color);
+        border-color: var(--conphig-btn-hover-border-color);
+      }
+    }
+  }
+
+  .form-wrap p, p.description, p.help, span.description{
+    font-size: var(--conphig-table-font-size);
+  }
+
+  /** Table forms */
+  .form-table th, .form-wrap label{
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: var(--conphig-font-weight-bolder);
+    font-size: var(--conphig-table-font-size-sm);
+  }
+
+  .form-table{
+    background-color: var(--tw-gray-100-light);
+    padding: var(--conphig-spacing-3);
+    border-radius: var(--conphig-border-radius-lg);
+    margin-bottom: var(--conphig-spacing-7);
+    box-shadow: var(--conphig-shadow);
+
+    tbody{
+
+      tr {
+        &:first-child{
+          th, td{
+            padding-top: var(--conphig-spacing-4) ;
+          }
+        }
+        &:last-child{
+          th, td{
+            padding-bottom: var(--conphig-spacing-4) ;
+          }
+        }
+        th:first-child{
+          padding-left: var(--conphig-spacing-4);
+        }
+      }
+    }
+
+    td p{
+      font-size: var(--conphig-table-font-size);
+    }
+
+    th{
+      font-size: var(--conphig-table-font-size-sm);
+      padding-top: var(--conphig-spacing-2);
+      padding-bottom: var(--conphig-spacing-2);
+
+      label{
+        display: inline-block;
+        margin-top: var(--conphig-spacing-2);
+      }
+    }
+
+    td{
+      padding-top: var(--conphig-spacing-2);
+      padding-bottom: var(--conphig-spacing-2);
+    }
+  }
+}
+

@@ -19,12 +19,8 @@ class Compiler {
     $this->extensions_loader
     ->attach(new ACF\Main($this->loader))
     ->attach(new Resets\Main($this->loader))
-    // ->attach(new GPBatteries\Main($this->loader))
+    ->attach(new CustomAdmin\Main($this->loader))
     ->load();
-
-    // var_dump(self::$manager);
-    // exit;
-
 
     $this->loader->run();
   }
