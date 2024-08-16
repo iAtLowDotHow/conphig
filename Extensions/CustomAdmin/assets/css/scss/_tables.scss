@@ -1,6 +1,14 @@
 body.conphig-admin {
+  .sorting-indicator:before{
+    font: normal 16px / 1 dashicons;
+    top: -8px;
+  }
+  #list-table-wrapper{
+    border: none;
+  }
+  #list-table-wrapper .wp-list-table,
+  .wp-list-table{
 
-  .wp-list-table {
     margin: 0;
     border-radius: var(--conphig-border-radius-lg);
     border: none;
@@ -15,11 +23,12 @@ body.conphig-admin {
       box-sizing: border-box;
       background-color: #F9FAFB;
       border-color: #EAECF0;
-      font-size: var(--conphig-table-font-size-sm);
+      font-size: var(--conphig-table-font-size-xs);
+
       font-weight: var(--conphig-font-weight-bolder);
       text-transform: uppercase;
       vertical-align: middle;
-      letter-spacing: 1px;
+      letter-spacing: 0.5px;
 
       .sorting-indicators{
         margin-top: -3px;
@@ -32,14 +41,16 @@ body.conphig-admin {
     td p,
     td ul{
       font-size: var(--conphig-table-font-size);
+      line-height: 1.32;
 
       .post-state{
-        font-size: var(--conphig-table-font-size-md);
         border-radius: var(--conphig-border-radius-md);
-        border: 1px solid var(--tw-gray-500-dark);
+        font-weight: var(--conphig-font-weight-bolder);
         color: var(--tw-gray-500-dark);
-        padding: 2px 4px;
-        margin-right: 2px;
+        padding: var(--conphig-spacing-px) calc( var(--conphig-spacing-px) * 2 );
+      }
+      .post-state, .post-state *{
+        font-size: var(--conphig-table-font-size-sm)!important;
       }
     }
 
@@ -51,44 +62,87 @@ body.conphig-admin {
         min-height: var(--conphig-spacing-5);
         line-height: 1;
       }
-    }
 
-    .row-actions{
-      font-size: var(--conphig-table-font-size-sm);
-      color: var(--tw-gray-700-dark)
+      /**
+        * General columns
+        */
+      &.column-date{
+        font-size: var(--conphig-table-font-size-sm);
+      }
     }
-
     .asenha-featured-image img{
-      width: 80px;
+      width: 70px;
       border-radius: var(--conphig-border-radius-md);
     }
 
+
+  }
+
+  /**
+    * Column specifics
+    */
+  .widefat{
     /**
-     * Column specifics
-     */
+    * Post ID
+    */
+    td.column-postid, th.column-postid{
+      font-size: var(--conphig-table-font-size-sm);
+      white-space: nowrap;
+      a{
+        padding-right: 0;
+      }
+    }
+    /**
+    * Plugin: description
+    */
+    td.column-description{
+      font-size: var(--conphig-table-font-size);
+      .plugin-description{
+        font-size: var(--conphig-table-font-size-xs);
+      }
+      .plugin-version-author-uri{
+        font-size: var(--conphig-table-font-size-sm);
+      }
+    }
+    /**
+    * ACF JSON
+    */
+    th.column-acf-json{
+      width: 130px;
+    }
+    td.column-acf-json{
+      font-size: var(--conphig-table-font-size-sm);
+
+    }
+
+    td.column-title{
+      strong {
+        font-size: var(--conphig-table-font-size-sm);
+        margin-bottom: var(--conphig-spacing-1);
+
+        a{
+          display: block;
+          font-size: var(--conphig-table-font-size-md);
+          margin: var(--conphig-spacing-1)  var(--conphig-spacing-1) var(--conphig-spacing-1) 0;
+          &:after{
+            content: "\A ";
+            display: block;
+            width: 100%;
+          }
+        }
+      }
+    }
     td.date,
     td.column-date,
-    td.desc{
-      font-size: var(--conphig-table-font-size-sm);
-    }
     td#cb{
       width: 30px;
       input{
         margin-top: -5px;
       }
     }
-
-    .plugin-version-author-uri{
-      font-size: var(--conphig-table-font-size-sm);
-    }
-
-
-  }
-
-
-
-
+  } // .widefat
 }
+
 
 
 

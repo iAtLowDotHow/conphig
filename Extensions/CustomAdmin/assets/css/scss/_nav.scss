@@ -1,7 +1,7 @@
 body.conphig-admin {
 
   #wpadminbar{
-    background-color: var(--tw-gray-200-dark);
+    background-color: var(--tw-coal-500);
     *{
       font-size: var(--conphig-adminmenu-font-size);
       line-height: 32px;
@@ -33,7 +33,7 @@ body.conphig-admin {
     a{
       /* color: var(--conphig-adminmenu-color); */
       opacity: var(--conphig-adminmenu-transparent);
-      transition: all 0.15s ease-in-out;
+      transition: all 0.05s ease-in-out;
       letter-spacing: -0.0175rem;
     }
 
@@ -53,17 +53,19 @@ body.conphig-admin {
     }
 
     #collapse-menu {
-      position: fixed;
-      z-index: 100;
+      position: sticky;
+      z-index: 3;
       bottom: 0;
-      background-color: var(--tw-gray-100-dark);
+      background-color: var(--tw-coal-500);
       display: block;
-      width: var(--conphig-adminmenu-width);
+      // width: var(--conphig-adminmenu-width);
       transition: width 0.15s ease-in-out;
     }
     #collapse-button{
+      box-shadow: none;
       &:hover, &:focus, &:active{
         color: var(--tw-light-light);
+        box-shadow: none;
       }
     }
 
@@ -76,6 +78,7 @@ body.conphig-admin {
 
     li.menu-top{
       min-height: 28px;
+      background-color: var(--tw-gray-200-dark);
     }
 
 
@@ -109,12 +112,25 @@ body.conphig-admin {
       transition: all 0.15s ease-in-out;
     }
 
+    a.wp-has-current-submenu{
+      background-color: var(--tw-coal-300);
+    }
+
+    div.wp-menu-image{
+      img{
+        padding-top: 4px;
+      }
+    }
     div.wp-menu-image,
     div.wp-menu-image.svg
     {
       background-size: var(--conphig-adminmenu-icon-size) auto;
       height: var(--conphig-adminmenu-image-height);
       width: var(--conphig-adminmenu-image-width);
+        img{
+          width: calc( var(--conphig-adminmenu-image-height) / 1.5 )!important;
+          height: calc( var(--conphig-adminmenu-image-height) / 1.5 )!important;
+        }
     }
 
     div.wp-menu-name{
@@ -161,21 +177,29 @@ body.conphig-admin {
 
 
 
-  #wpcontent{
-    margin-left:var(--conphig-adminmenu-width);
+  #wpcontent,
+  #wpfooter{
+    // margin-left:var(--conphig-adminmenu-width);
     transition: margin 0.15s ease-in-out;
   }
   #adminmenuwrap,
   #adminmenu,
   #adminmenu .wp-submenu,
   #adminmenuback{
-    width: var(--conphig-adminmenu-width);
+    // width: var(--conphig-adminmenu-width);
     transition: width 0.15s ease-in-out;
   }
   #adminmenu {
+    .awaiting-mod,
+    .menu-counter,
+    .update-plugins{
+      font-size: var(--conphig-font-size-sm);
+      height: var(--conphig-adminmenu-icon-height);
+      line-height: 1.4;
+    }
 
     .wp-not-current-submenu .wp-submenu {
-      left: var(--conphig-adminmenu-width);
+      // left: var(--conphig-adminmenu-width);
       border-radius: var(--conphig-border-radius-lg);
       padding-right: var(--conphig-adminmenu-item-padding-x);
       margin-top: calc( var(--conphig-adminmenu-item-padding-y) * -0.5);
@@ -200,6 +224,19 @@ body.conphig-admin {
       .opensub .wp-submenu{
         left: var(--conphig-adminmenu-collpase-width);
         height: auto;
+        position: absolute;
+        border-radius: var(--conphig-border-radius-md);
+        padding: var(--conphig-adminmenu-item-padding-x) 0;
+
+        li{
+          a{
+            padding-left: calc( var(--conphig-adminmenu-item-padding-x) * 2 );
+          }
+
+          &.wp-submenu-head{
+            display: none;
+          }
+        }
       }
     }
 

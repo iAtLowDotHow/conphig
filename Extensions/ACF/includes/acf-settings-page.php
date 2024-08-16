@@ -16,15 +16,6 @@ if ( function_exists( 'acf_add_options_page' ) ) {
 }
 
 function hows_ss_register_options_page() {
-	// Add the top-level page.
-	acf_add_options_page(
-		array(
-			'page_title' => 'test Site Settings',
-			'menu_slug'  => 'hows-site-settings',
-			'redirect'   => false,
-		)
-	);
-
 	// Add the sub-page.
 	acf_add_options_sub_page(
 		array(

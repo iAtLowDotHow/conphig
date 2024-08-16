@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
 /* tailwind */
 :root {
   --tw-sm: 640px;
@@ -124,7 +125,8 @@
 }
 /* Conphig */
 :root {
-  --conphig-font-family: Inter, system-ui, sans-serif;
+  --conphig-font-family: "Inter", system-ui, sans-serif;
+  --conphig-font-size: 12px;
 
   --conphig-adminmenu-color: var(--tw-gray-300-dark);
   --conphig-adminmenu-font-size: 12px;
@@ -141,9 +143,17 @@
   --conphig-adminmenu-item-padding-y: 6px;
   --conphig-adminmenu-item-padding: 6px 8px;
 
+  --conphig-plugin-icon-size: 80px;
+
   --conphig-font-weight-bold: 500;
   --conphig-font-weight-bolder: 700;
   --conphig-font-weight-boldest: 900;
+
+  --conphig-font-size-sm: 10px;
+  --conphig-font-size-md: 11px;
+  --conphig-font-size: 12px;
+  --conphig-font-size-lg: 14px;
+  --conphig-font-size-xl: 16px;
 
   --conphig-border-radius-none: 0px;
   --conphig-border-radius-sm: 0.125rem;
@@ -154,10 +164,15 @@
   --conphig-border-radius-rounded: 50%;
 
   --conphig-table-font-size: 12px;
+  --conphig-table-font-size-xs: 8.5px;
   --conphig-table-font-size-sm: 10px;
   --conphig-table-font-size-md: 11px;
   --conphig-table-font-size-lg: 14px;
   --conphig-table-font-size-xl: 16px;
+
+  --conphig-postbox-icon-size: 30px;
+  --conphig-postbox-icon-width: 30px;
+  --conphig-postbox-icon-height: 30px;
 
   --conphig-spacing-0: 0px;
   --conphig-spacing-px: 1px;
@@ -174,6 +189,7 @@
   --conphig-btn-font-size-md: 11px;
   --conphig-btn-font-size-lg: 14px;
   --conphig-btn-font-size-xl: 16px;
+  --conphig-btn-min-height: 28px;
   --conphig-btn-bg: transparent;
   --conphig-btn-border-color: #0783BE;
   --conphig-btn-color: #0783BE;
@@ -189,4 +205,6 @@
   --conphig-shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);
   --conphig-shadow-inner: inset 0 2px 4px 0 rgb(0 0 0 / 0.05);
   --conphig-shadow-none: none;
+
+  --cacf-switch-slider-size: 20px;
 }

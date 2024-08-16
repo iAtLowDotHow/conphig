@@ -23,25 +23,31 @@ body.conphig-admin{
 
   /** Buttons */
   &.wp-core-ui {
+    select{
+      font-size: var(--conphig-font-size);
+    }
+
     .button,
     .button-primary,
     .button-secondary{
       border-radius: var(--conphig-border-radius-md);
       font-size: var(--conphig-btn-font-size);
       transition: all 0.15s ease-in-out;
-      background: var(--conphig-btn-bg);
+      min-height: var(--conphig-btn-min-height);
 
       &:hover{
-        color: var(--conphig-btn-hover-color);
-        background-color: var(--conphig-btn-hover-bg);
+        // color: var(--conphig-btn-hover-color);
+        // background-color: var(--conphig-btn-hover-bg);
         border-color: var(--conphig-btn-hover-border-color);
         transition: all 0.15s ease-in-out;
       }
     }
     .button-primary{
-      background-color: var(--conphig-btn-border-color);
+      // background-color: var(--conphig-btn-border-color);
+
       &:hover{
         background-color: var(--conphig-btn-hover-color);
+        color: var(--tw-light-light);
         border-color: var(--conphig-btn-hover-border-color);
       }
     }
@@ -103,6 +109,48 @@ body.conphig-admin{
     td{
       padding-top: var(--conphig-spacing-2);
       padding-bottom: var(--conphig-spacing-2);
+    }
+  }
+
+
+  .row-actions{
+    font-size: var(--conphig-table-font-size-sm);
+    color: var(--tw-gray-700-dark);
+    >span{
+      z-index: -1;
+
+      &.asenha-list-table-item-id{
+        margin-left: 4px;
+      }
+    }
+    a, button{
+      position: relative;
+      border-radius: var( --conphig-border-radius-md);
+      border: 1px solid transparent;
+      color: var(--tw-primary-light);
+      z-index: 10;
+      display: inline-block;
+      background-color: var(--conphig-btn-hover-bg);
+      padding: 3px;
+      margin-right: -8px;
+      margin-left: 2px;
+      transition: all 0.15s ease-in-out;
+
+      &:hover{
+        color: var(--conphig-btn-hover-border-color);
+        border: 1px solid var(--conphig-btn-border-color);
+        background-color: var(--tw-light-light);
+        transition: all 0.15s ease-in-out;
+      }
+
+      span{
+        width: 16px;
+        height: 16px;
+        font-size: 16px;
+        line-height: 16px;
+        vertical-align: middle;
+        text-align: center;
+      }
     }
   }
 }

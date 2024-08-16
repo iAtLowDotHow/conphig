@@ -1,0 +1,129 @@
+<script>
+let selectCountry;
+let selectNationality;
+let membersChkBoxes;
+let richRadios = {
+  all: [],
+  onsite: {
+    gchoice: null,
+    input: null
+  },
+  hybrid: {
+    gchoice: null,
+    input: null
+  }
+}
+
+const updateRichRadioBtns = ()=>{
+  checkHybrid();
+  checkOnsite();
+
+  richRadios.all.forEach( gchoice => {
+    if (gchoice.querySelector(`input[type="radio"]`).checked) {
+      gchoice.classList.add('checked');
+    }
+    else{
+      gchoice.classList.remove('checked');
+    }
+  });
+
+}
+
+
+const checkHybrid = ()=>{
+  if (selectCountry.value === 'Malaysia'){
+    /**
+     * if Malaysia selected,
+     * - disable hybrid radio button
+     */
+    richRadios.hybrid.gchoice.classList.add('disabled');
+    richRadios.hybrid.input.disabled = true;
+    if( richRadios.hybrid.input.checked ) {
+      let input = richRadios.all[0].querySelector('input[type="radio"]');
+      input.click();
+      richRadios.hybrid.input.checked = false;
+    }
+  }
+  else{
+    /**
+     * if Malaysia not selected,
+     * - enable hybrid radio button
+     */
+    richRadios.hybrid.gchoice.classList.remove('disabled');
+    richRadios.hybrid.input.disabled = false;
+  }
+}
+
+
+const checkOnsite = ()=>{
+  // console.log('checkOnsite', selectNationality.value);
+  if (selectNationality.value === 'Non Malaysian Citizen' && isMember() === false){
+    /**
+     * if Malaysian Citizen selected && not a member,
+     * - enable on-site radio button
+     */
+    richRadios.onsite.gchoice.classList.remove('disabled');
+    richRadios.onsite.input.disabled = false;
+  }
+  else{
+    /**
+     * - disable on-site radio button
+     */
+    richRadios.onsite.gchoice.classList.add('disabled');
+    richRadios.onsite.input.disabled = true;
+    if( richRadios.onsite.input.checked ) {
+      let input = richRadios.all[0].querySelector('input[type="radio"]');
+      input.click();
+      richRadios.onsite.input.checked = false;
+    }
+
+  }
+}
+
+const isMember = ()=>{
+  membersChkBoxes.forEach(checkbox => {
+    if (checkbox.checked) {
+      return true;
+    }
+  });
+
+  return false;
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  selectCountry = document.querySelector(`.cgf_country_of_residence .ginput_address_country select`);
+  selectCountry.addEventListener('change', () => {
+    updateRichRadioBtns();
+  })
+
+  selectNationality = document.querySelector(`.cgf_nationality select`);
+  selectNationality.addEventListener('change', () => {
+    updateRichRadioBtns();
+  })
+
+  membersChkBoxes = document.querySelectorAll('.cgf_is_member input[type="checkbox"]');
+  membersChkBoxes.forEach(checkbox => {
+    checkbox.addEventListener('change', () => {
+      updateRichRadioBtns();
+    });
+  });
+
+  richRadios.all = document.querySelectorAll('.cgf_rich_radio .gfield_radio .gchoice');
+  richRadios.all.forEach(gchoice => {
+    if (gchoice.querySelector('input[type="radio"]').value.includes('hybrid')) {
+      richRadios.hybrid.gchoice = gchoice;
+      richRadios.hybrid.input = gchoice.querySelector('input[type="radio"]');
+    }
+    else if (gchoice.querySelector('input[type="radio"]').value.includes('onsite')) {
+      richRadios.onsite.gchoice = gchoice;
+      richRadios.onsite.input = gchoice.querySelector('input[type="radio"]');
+    }
+    gchoice.addEventListener('change', () => {
+      updateRichRadioBtns();
+    });
+  });
+
+  updateRichRadioBtns();
+});
+
+</script>

@@ -34,6 +34,15 @@ body.conphig-admin{
     font-size: var(--conphig-table-font-size);
   }
 
+  .notice, div.error, div.updated{
+    border-width: 0px 0px 0px 4px;
+    outline: none;
+    border-radius: var(--conphig-border-radius-md);
+    p{
+      font-size: var(--conphig-table-font-size);
+    }
+  }
+
   .subsubsub{
     margin-top: var(--conphig-spacing-2);
     font-size: var(--conphig-table-font-size);
@@ -60,6 +69,11 @@ body.conphig-admin{
 
     }
 
+  }
+
+
+  .wp-person a:focus .gravatar, a:focus, a:focus .media-icon img, a:focus .plugin-icon{
+    box-shadow: none;
   }
 }
 

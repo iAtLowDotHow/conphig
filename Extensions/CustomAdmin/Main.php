@@ -1,6 +1,8 @@
 <?php namespace Conphig\Extensions\CustomAdmin;
 use Conphig\Core\Observer as Observer;
 use Conphig\Core\Loader as Loader;
+use Conphig\Extensions\CustomAdmin\Modules\RowActions;
+use Conphig\Extensions\CustomAdmin\Modules\StylesScripts;
 
 class Main implements Observer
 {
@@ -15,15 +17,20 @@ class Main implements Observer
 
 	public function handle()
 	{
+		$rowActions = new RowActions();
+		$stylesScripts = new StylesScripts();
 
 		$this->loader
-		->add_action( 'admin_init', $this, 'enqueue_admin_styles_scripts' )
+		->add_action( 'admin_init', $stylesScripts, 'enqueue_admin_styles_scripts' )
 		->add_filter('admin_body_class', $this, 'add_admin_body_class')
-		// ->add_action( 'admin_init', $this, 'restrict_admin_with_redirect', 1 );
+		->add_filter('page_row_actions', $rowActions, 'modify_row_actions', 999, 2)
+		->add_filter('post_row_actions', $rowActions, 'modify_row_actions', 999, 2)
+		->add_filter('user_row_actions', $rowActions, 'modify_row_actions', 999, 2)
 		;
 
 		return $this;
 	}
+
 
 
 

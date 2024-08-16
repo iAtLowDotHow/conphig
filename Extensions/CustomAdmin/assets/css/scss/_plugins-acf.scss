@@ -1,0 +1,92 @@
+body.conphig-admin{
+  .acf-postbox {
+    .acf-hndle-cog{
+      height: var(--conphig-postbox-icon-height);
+      width: var(--conphig-postbox-icon-width);
+      line-height: var(--conphig-postbox-icon-height);
+    }
+  }
+
+  /**
+   * ACF tabs
+   */
+   li{
+    margin-right: var(--conphig-spacing-sm);
+    .acf-tab-button{
+      border-top-left-radius:var(--conphig-border-radius-lg);
+      border-top-right-radius:var(--conphig-border-radius-lg);
+      border-width: 0px;
+      transition: all 0.15s ease-in-out;
+      font-weight: normal;
+
+      &:hover{
+        transition: all 0.15s ease-in-out;
+      }
+    }
+
+    &.active{
+      .acf-tab-button{
+        // font-weight: var(--conphig-font-weight-bold);
+      }
+    }
+  }
+
+
+  /**
+   * Custom class
+   *
+   * Created for Custom Admin styling in Conphig
+   */
+  .cacf_nolabel{
+    > .acf-label{
+      display: none;
+    }
+  }
+  .cacf_nowrap{
+    .cacf_minimal{
+      &::before{
+        display: none;
+      }
+      .acf-label{
+        width: calc( 100% - 70px );
+      }
+      .acf-input{
+        width: 70px;
+        text-align: right;
+        .acf-true-false:has(.acf-switch) label{
+          justify-content: flex-end;
+        }
+      }
+    }
+  }
+
+  .cacf_minimal{
+    .acf-switch{
+      border-radius: 50px;
+      height: var(--cacf-switch-slider-size);
+
+      .acf-switch-on,
+      .acf-switch-off{
+        color: transparent;
+        text-shadow: none;
+        min-width: calc( var(--cacf-switch-slider-size) - 2px );
+        width: calc( var(--cacf-switch-slider-size) - 2px );
+
+        padding: 0;
+      }
+
+      .acf-switch-slider{
+
+        border-radius: var(--conphig-border-radius-rounded);
+        width: calc( var(--cacf-switch-slider-size) - 6px );
+        height: calc( var(--cacf-switch-slider-size) - 6px );
+      }
+    }
+
+  }
+
+}
+
+
+
+

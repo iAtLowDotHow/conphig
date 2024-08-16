@@ -1,0 +1,18 @@
+body.conphig-admin{
+  .wp-filter{
+    border-radius: var(--conphig-border-radius-md);
+    border-width: 0px;
+    box-shadow: var(--conphig-shadow-md);
+  }
+
+  .search-form.search-plugins{
+    padding: var(--conphig-spacing-4);
+    select,
+    .wp-filter-search,
+    .button{
+      font-size: var(--conphig-font-size);
+    }
+  }
+
+}
+

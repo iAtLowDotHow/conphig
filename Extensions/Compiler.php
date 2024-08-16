@@ -19,7 +19,11 @@ class Compiler {
     $this->extensions_loader
     ->attach(new ACF\Main($this->loader))
     ->attach(new Resets\Main($this->loader))
+    ->attach(new SecurityResets\Main($this->loader))
     ->attach(new CustomAdmin\Main($this->loader))
+    ->attach(new MenuOrganiser\Main($this->loader))
+    ->attach(new UserSwitching\Main($this->loader))
+    ->attach(new WPStatuses\Main($this->loader))
     ->load();
 
     $this->loader->run();
