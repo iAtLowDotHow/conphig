@@ -75,6 +75,16 @@ class RowActions
       );
     }
 
+    if (isset($actions['export_template'])) {
+      $actions['export_template'] = preg_replace(
+        '/>(.*?)<\/a>/',
+        '>' . '<span class="material-symbols-rounded" title="Export Template">system_update_alt</span>' . '</a>',
+        $actions['export_template']
+      );
+    }
+
+
+
     if (isset($actions['untrash'])) {
       $actions['untrash'] = preg_replace(
         '/>(.*?)<\/a>/',
